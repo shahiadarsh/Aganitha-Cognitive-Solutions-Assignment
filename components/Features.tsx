@@ -40,7 +40,7 @@ const Features: FC = () => {
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="animate-fade-in-up text-base font-semibold leading-7 text-purple-600">
+          <h2 className="animate-fade-in-up text-base font-semibold leading-7 text-gray-700">
             Our Features
           </h2>
           <p 
@@ -66,8 +66,8 @@ const Features: FC = () => {
                 style={{ animationDelay: `${index * 200 + 600}ms` }}
               >
                 <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100">
-                    <span className="h-6 w-6 text-purple-600">{feature.icon}</span>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100">
+                    <span className="h-6 w-6 text-gray-800">{feature.icon}</span>
                   </div>
                   {feature.title}
                 </dt>

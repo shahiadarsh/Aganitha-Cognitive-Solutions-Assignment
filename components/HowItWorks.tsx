@@ -35,7 +35,7 @@ const HowItWorks: FC = () => {
     <section className="w-full bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-base font-semibold leading-7 text-purple-600">How It Works</h2>
+          <h2 className="text-base font-semibold leading-7 text-gray-700">How It Works</h2>
           <p className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
             Get Started in 3 Easy Steps
           </p>
@@ -49,7 +49,7 @@ const HowItWorks: FC = () => {
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 -z-10 hidden md:block"
           >
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 h-1 border-t-2 border-dashed border-gray-300"></div>
+            <div className="absolute left-1/2 top-1/2 h-1 w-2/3 -translate-x-1/2 -translate-y-1/2 border-t-2 border-dashed border-gray-300"></div>
           </div>
 
           <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
@@ -60,7 +60,7 @@ const HowItWorks: FC = () => {
                 style={{ animationDelay: `${index * 200 + 200}ms` }}
               >
                 <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 ring-8 ring-white">
-                  <span className="text-purple-600">{step.icon}</span>
+                  <span className="text-gray-800">{step.icon}</span>
                 </div>
                 <h3 className="text-xl font-semibold leading-7 text-gray-900">{step.title}</h3>
                 <p className="mt-2 text-base leading-7 text-gray-600">{step.description}</p>

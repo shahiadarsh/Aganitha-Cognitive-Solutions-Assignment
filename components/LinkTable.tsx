@@ -34,8 +34,8 @@ const BarChartIcon = ({ className = 'h-5 w-5' }) => (
 
 const EmptyState = () => (
     <div className="w-full rounded-2xl bg-gray-50/80 p-8 text-center backdrop-blur-sm">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-purple-100 to-pink-100">
-            <svg className="h-8 w-8 text-purple-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"/></svg>
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-200">
+            <svg className="h-8 w-8 text-gray-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"/></svg>
         </div>
         <h3 className="mt-6 text-xl font-bold text-gray-900">Your links will appear here</h3>
         <p className="mt-2 text-gray-600">Use the form above to create your first short link and start tracking!</p>
@@ -76,13 +76,13 @@ const LinkTable: FC<LinkTableProps> = ({ links, onLinkDeleted }) => {
     <div className="w-full space-y-4">
         <h2 className="text-2xl font-bold text-gray-900">Your Links</h2>
         {links.map((link) => (
-            <div key={link.shortCode} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl bg-white p-5 shadow-sm transition-all hover:shadow-lg">
+            <div key={link.shortCode} className="flex flex-col items-start justify-between gap-4 rounded-2xl bg-white p-5 shadow-sm transition-all hover:shadow-lg sm:flex-row sm:items-center">
                 <div className="flex-grow space-y-2">
                     <a
                       href={`${API_BASE_URL}/${link.shortCode}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block text-xl font-bold text-purple-600 hover:underline"
+                      className="block text-xl font-bold text-gray-900 hover:underline"
                     >
                       {`${API_BASE_URL.replace(/^https?:\/\//, '')}/${link.shortCode}`}
                     </a>
@@ -91,10 +91,10 @@ const LinkTable: FC<LinkTableProps> = ({ links, onLinkDeleted }) => {
                     </p>
                 </div>
 
-                <div className="flex w-full sm:w-auto items-center justify-between sm:justify-end gap-4">
+                <div className="flex w-full items-center justify-between gap-4 sm:w-auto sm:justify-end">
                     <div className="flex items-center gap-2 text-gray-600" title="Total clicks">
                         <BarChartIcon className="h-5 w-5" />
-                        <span className="font-bold text-lg text-gray-800">{link.clickCount}</span>
+                        <span className="text-lg font-bold text-gray-800">{link.clickCount}</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <button

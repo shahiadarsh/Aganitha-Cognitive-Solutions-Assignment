@@ -2,15 +2,11 @@
 
 import { FC, useState } from 'react';
 
+// लोगो आइकॉन को अब 'currentColor' का उपयोग करने के लिए अपडेट किया गया है,
+// ताकि इसका रंग इसके पैरेंट एलिमेंट के टेक्स्ट के रंग से मेल खाए।
 const LogoIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="logoGradient" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#8B5CF6" />
-        <stop offset="100%" stopColor="#EC4899" />
-      </linearGradient>
-    </defs>
-    <path d="M16 4C9.372 4 4 9.372 4 16C4 22.628 9.372 28 16 28C22.628 28 28 22.628 28 16C28 9.372 22.628 4 16 4ZM20.668 12.668L18 15.336C17.472 15.864 16.632 15.864 16.104 15.336L15.336 14.568C14.808 14.04 13.968 14.04 13.44 14.568L11.332 16.668C10.804 17.196 10.804 18.036 11.332 18.564L14 21.232C14.528 21.76 15.368 21.76 15.896 21.232L16.664 20.464C17.192 19.936 18.032 19.936 18.56 20.464L20.668 22.564C21.196 23.092 22.036 23.092 22.564 22.564L23.232 21.896C23.76 21.368 23.76 20.528 23.232 20L18 14.664C17.472 14.136 16.632 14.136 16.104 14.664L15.336 15.432C14.808 15.96 13.968 15.96 13.44 15.432L12.104 14.104L14 12.232L16.664 9.436C17.192 8.908 18.032 8.908 18.56 9.436L20.668 11.564C21.196 12.092 21.196 12.14 20.668 12.668Z" fill="url(#logoGradient)" />
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 4C9.372 4 4 9.372 4 16C4 22.628 9.372 28 16 28C22.628 28 28 22.628 28 16C28 9.372 22.628 4 16 4ZM20.668 12.668L18 15.336C17.472 15.864 16.632 15.864 16.104 15.336L15.336 14.568C14.808 14.04 13.968 14.04 13.44 14.568L11.332 16.668C10.804 17.196 10.804 18.036 11.332 18.564L14 21.232C14.528 21.76 15.368 21.76 15.896 21.232L16.664 20.464C17.192 19.936 18.032 19.936 18.56 20.464L20.668 22.564C21.196 23.092 22.036 23.092 22.564 22.564L23.232 21.896C23.76 21.368 23.76 20.528 23.232 20L18 14.664C17.472 14.136 16.632 14.136 16.104 14.664L15.336 15.432C14.808 15.96 13.968 15.96 13.44 15.432L12.104 14.104L14 12.232L16.664 9.436C17.192 8.908 18.032 8.908 18.56 9.436L20.668 11.564C21.196 12.092 21.196 12.14 20.668 12.668Z" />
   </svg>
 );
 
@@ -38,41 +34,28 @@ const CloseIcon = () => (
 const Navbar: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const navLinks = [
-    // { name: 'Features', href: '#features' },
-    // { name: 'How It Works', href: '#how-it-works' },
-  ];
-
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <a href="#" className="flex items-center gap-2">
+          <a href="#" className="flex items-center gap-2 text-gray-900">
             <LogoIcon />
-            <span className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+            <span className="text-2xl font-extrabold tracking-tight">
               TinyLink
             </span>
           </a>
-
-          {/* <nav className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link) => (
-              <a key={link.name} href={link.href} className="text-sm font-medium text-gray-600 transition-colors hover:text-purple-600">
-                {link.name}
-              </a>
-            ))}
-          </nav> */}
           
           <div className="hidden items-center gap-4 md:flex">
             <a href="https://github.com/shahiadarsh/Aganitha-Cognitive-Solutions-Assignment" target="_blank" rel="noopener noreferrer" className="text-gray-500 transition-colors hover:text-gray-900">
                 <GitHubIcon />
             </a>
-            <a href="#" className="rounded-full bg-gradient-to-r from-purple-600 to-pink-500 px-5 py-2 text-sm font-semibold text-white shadow-md transition-transform hover:scale-105">
+            <a href="#" className="rounded-full bg-gray-900 px-5 py-2 text-sm font-semibold text-white shadow-md transition-all hover:bg-gray-700 hover:scale-105">
                 Get Started
             </a>
           </div>
 
           <div className="md:hidden">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-700">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-800">
               {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
           </div>
@@ -80,18 +63,13 @@ const Navbar: FC = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 w-full bg-white shadow-lg p-4">
+        <div className="absolute left-0 top-16 w-full bg-white p-4 shadow-lg md:hidden">
             <nav className="flex flex-col gap-4">
-                {/* {navLinks.map((link) => (
-                    <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-gray-700 hover:bg-gray-100 rounded-md p-2 font-medium">
-                        {link.name}
-                    </a>
-                ))} */}
-                <div className="mt-2 border-t border-gray-200 pt-4 flex flex-col gap-3">
-                    <a href="#" className="w-full text-center rounded-full bg-gradient-to-r from-purple-600 to-pink-500 px-5 py-2 text-sm font-semibold text-white shadow-md">
+                <div className="flex flex-col gap-3">
+                    <a href="#" className="w-full rounded-full bg-gray-900 px-5 py-2 text-center text-sm font-semibold text-white shadow-md">
                         Get Started
                     </a>
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-full flex justify-center items-center gap-2 text-center rounded-full bg-gray-800 text-white px-5 py-2 text-sm font-semibold shadow-md">
+                    <a href="https://github.com/shahiadarsh/Aganitha-Cognitive-Solutions-Assignment" target="_blank" rel="noopener noreferrer" className="flex w-full items-center justify-center gap-2 rounded-full bg-gray-800 px-5 py-2 text-center text-sm font-semibold text-white shadow-md">
                         <GitHubIcon /> GitHub
                     </a>
                 </div>
