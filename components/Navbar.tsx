@@ -63,7 +63,7 @@ const Navbar: FC = () => {
           </nav> */}
           
           <div className="hidden items-center gap-4 md:flex">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 transition-colors hover:text-gray-900">
+            <a href="https://github.com/shahiadarsh/Aganitha-Cognitive-Solutions-Assignment" target="_blank" rel="noopener noreferrer" className="text-gray-500 transition-colors hover:text-gray-900">
                 <GitHubIcon />
             </a>
             <a href="#" className="rounded-full bg-gradient-to-r from-purple-600 to-pink-500 px-5 py-2 text-sm font-semibold text-white shadow-md transition-transform hover:scale-105">
