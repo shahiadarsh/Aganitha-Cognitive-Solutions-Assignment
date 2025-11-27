@@ -2,11 +2,17 @@
 
 import { useEffect, useRef } from 'react';
 
+type Dot = {
+  x: number;
+  y: number;
+};
+
 const CursorTrail = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const points = useRef<{ x: number; y: number; age: number }[]>([]);
+  const dots = useRef<Dot[]>([]);
+  const mousePosition = useRef<Dot>({ x: 0, y: 0 });
   const animationFrameId = useRef<number | null>(null);
-  const hue = useRef(0);
+  const hue = useRef(200);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -14,47 +20,71 @@ const CursorTrail = () => {
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-
+    
     const setCanvasSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
 
+    const initializeDots = () => {
+      const DOT_COUNT = 20;
+      dots.current = [];
+      for (let i = 0; i < DOT_COUNT; i++) {
+        dots.current.push({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+      }
+    };
+
     setCanvasSize();
-    window.addEventListener('resize', setCanvasSize);
+    initializeDots();
+    
+    window.addEventListener('resize', () => {
+        setCanvasSize();
+        initializeDots();
+    });
 
     const handleMouseMove = (e: MouseEvent) => {
-      points.current.push({ x: e.clientX, y: e.clientY, age: 0 });
+      mousePosition.current = { x: e.clientX, y: e.clientY };
     };
 
     window.addEventListener('mousemove', handleMouseMove);
 
     const draw = () => {
-      if (!ctx) return;
-      
+      if (!canvas || !ctx) return;
+
+      const easing = 0.25;
+      const DOT_COUNT = dots.current.length;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.globalCompositeOperation = 'lighter';
 
-      hue.current = (hue.current + 1) % 360;
+      hue.current = (hue.current + 0.5) % 360;
 
-      for (let i = 0; i < points.current.length; i++) {
-        const point = points.current[i];
-        point.age += 1;
+      dots.current.forEach((dot, index) => {
+        let targetX: number;
+        let targetY: number;
 
-        const opacity = 1 - point.age / 50;
-        if (opacity <= 0) {
-          continue;
+        if (index === 0) {
+          targetX = mousePosition.current.x;
+          targetY = mousePosition.current.y;
+        } else {
+          targetX = dots.current[index - 1].x;
+          targetY = dots.current[index - 1].y;
         }
 
-        const radius = 20 - (point.age / 50) * 15;
-        
-        ctx.beginPath();
-        ctx.fillStyle = `hsla(${hue.current + i * 3}, 100%, 70%, ${opacity})`;
-        ctx.arc(point.x, point.y, radius > 0 ? radius : 1, 0, Math.PI * 2);
-        ctx.fill();
-      }
+        dot.x += (targetX - dot.x) * easing;
+        dot.y += (targetY - dot.y) * easing;
 
-      points.current = points.current.filter(p => p.age < 50);
-      
+        const size = (DOT_COUNT - index) * 1.5;
+        const opacity = 1 - index / DOT_COUNT;
+        const currentHue = hue.current + index * 3;
+
+        ctx.beginPath();
+        ctx.fillStyle = `hsla(${currentHue}, 100%, 65%, ${opacity})`;
+        ctx.arc(dot.x, dot.y, size > 0 ? size : 0.1, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.closePath();
+      });
+
       animationFrameId.current = requestAnimationFrame(draw);
     };
     
@@ -72,7 +102,7 @@ const CursorTrail = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed top-0 left-0"
+      className="pointer-events-none fixed top-0 left-0 w-full h-full"
       style={{ zIndex: 9999 }}
     />
   );
